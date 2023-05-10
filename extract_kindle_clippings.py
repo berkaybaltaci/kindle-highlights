@@ -8,11 +8,12 @@ from datetime import datetime, timedelta, timezone
 import getpass
 import sys
 
-def extract_kindle_clippings():
-    if len(sys.argv) > 1:
-        infile = sys.argv[1]
-    else:
-        infile = 'My Clippings.txt'
+def extract_kindle_clippings(file_path):
+    # if len(sys.argv) > 1:
+    #     infile = sys.argv[1]
+    # else:
+    #     infile = 'My Clippings.txt'
+    infile = file_path
 
     if not os.path.isfile(infile):
         username = getpass.getuser()
@@ -222,7 +223,7 @@ def extract_kindle_clippings():
             if note_hash in existing_hashes:
                 print('Note', note_hash, 'is already in', existing_hashes[note_hash])
             else:
-                print('Adding new note to', outfile + ':', note_hash, note_type, note_loc, note_date)
+                # print('Adding new note to', outfile + ':', note_hash, note_type, note_loc, note_date)
                 
                 comment = str(commentstr + note_hash + ' ; ' + note_type + ' ; ' + note_loc + ' ; ' + note_date)
                 

@@ -15,20 +15,16 @@ def format_output():
                 # read the lines of the input file
                 lines = input_file.readlines()
 
-            filtered_lines = [line for line in lines if not line.startswith("..") and (line[0].isupper() or line.startswith('=') or line.startswith(':'))]
+            filtered_lines = [line for line in lines if not line.startswith("..") and line.strip()]
 
             line_number = 1
-            prev_line = ""
             for i in range(len(filtered_lines)):
-                if filtered_lines[i] == prev_line:
-                    filtered_lines.remove(prev_line)
-                elif filtered_lines[i].startswith(':'):
+                if filtered_lines[i].startswith(':'):
                     filtered_lines.insert(i + 1, "\n")
                 elif filtered_lines[i].strip() and i != 0 and not filtered_lines[i].startswith('='):
-                    # add the line number
-                    filtered_lines[i] = f"{line_number}. {filtered_lines[i]}"
+                    if i != 0:
+                        filtered_lines[i] = f"{line_number}. {filtered_lines[i]}"
                     line_number += 1
-                prev_line = filtered_lines[i]
 
             with open(output_file_path, "w") as output_file:
                 # write the filtered lines to the output file
